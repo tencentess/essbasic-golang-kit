@@ -66,3 +66,10 @@ func ConvertImageFileToBase64(filePath string) string {
 	bs64 := base64.StdEncoding.EncodeToString(fileBytes)
 	return bs64
 }
+
+func BuildFormField(componentName, componentValue string) *essbasic.FormField {
+	return &essbasic.FormField{
+		ComponentName:  common.StringPtr(componentName),
+		ComponentValue: common.StringPtr(componentValue),
+	}
+}

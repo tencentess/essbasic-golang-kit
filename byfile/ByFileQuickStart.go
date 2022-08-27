@@ -12,9 +12,13 @@ func main() {
 	filePath := "testdata/blank.pdf"
 	// 定义合同名
 	flowName := "我的第一个合同"
+	// 渠道侧合作企业名称
+	proxyOrganizationName := "我的企业"
 
 	// 此处为快速发起；如果是正式接入，构造签署人，请参考函数内说明，构造需要的场景参数
 	flowApproverInfos := BuildApprovers()
+	// 创建控制台链接
+	loginUrlResp := api.CreateConsoleLoginUrl(utils.SetAgent(), proxyOrganizationName)
 
 	// Step 2
 	// 将文件处理为Base64编码后的文件内容
@@ -23,6 +27,9 @@ func main() {
 	// 发起合同
 	resp := api.CreateFlowByFileDirectly(fileBase64, flowName, flowApproverInfos)
 
+	fmt.Println("您的控制台入口为：")
+	fmt.Println(*loginUrlResp.Response.ConsoleUrl)
+	fmt.Print("\r\n\r\n")
 	// 返回合同Id
 	fmt.Println("您创建的合同id为：")
 	fmt.Println(*resp["flowId"])

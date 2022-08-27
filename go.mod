@@ -62,7 +62,7 @@ require (
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cme v1.0.472 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cmq v1.0.472 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cms v1.0.472 // indirect
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.472
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.472 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cpdp v1.0.472 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cr v1.0.472 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cvm v1.0.472 // indirect
@@ -92,7 +92,7 @@ require (
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/emr v1.0.472 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/es v1.0.472 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/ess v1.0.472 // indirect
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic v1.0.472
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic v1.0.472 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/facefusion v1.0.472 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/faceid v1.0.472 // indirect
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/fmu v1.0.472 // indirect

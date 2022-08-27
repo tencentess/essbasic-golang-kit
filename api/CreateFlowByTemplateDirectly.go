@@ -7,14 +7,11 @@ import (
 )
 
 // CreateFlowByTemplateDirectly 通过合同名和模板Id直接发起签署流程
-func CreateFlowByTemplateDirectly(flowName, proxyOrganizationName, templateId string,
+func CreateFlowByTemplateDirectly(flowName, templateId string,
 	flowApproverInfos []*v20210526.FlowApproverInfo) map[string][]*string {
 
 	agent := utils.SetAgent()
 	resp := make(map[string][]*string)
-
-	loginUrlResp := CreateConsoleLoginUrl(agent, proxyOrganizationName)
-	resp["ConsoleUrl"] = []*string{loginUrlResp.Response.ConsoleUrl}
 
 	// 创建签署流程
 	// 签署数量
@@ -22,6 +19,8 @@ func CreateFlowByTemplateDirectly(flowName, proxyOrganizationName, templateId st
 	var flowInfos []*v20210526.FlowInfo
 	for i := 0; i < count; i++ {
 		flowInfos = append(flowInfos, utils.FillFlowInfo(templateId, flowName, flowApproverInfos))
+		// 构建内容控件填充结构(根据自己需求使用)
+		// flowInfos[i].FormFields = []*v20210526.FormField{utils.BuildFormField("姓名", "张三")}
 	}
 
 	// 发起签署
