@@ -33,7 +33,7 @@ func main() {
 
 	count := config.COUNT
 	fmt.Println("您的控制台入口为：")
-	fmt.Println(loginUrlResp.Response.ConsoleUrl)
+	fmt.Println(*loginUrlResp.Response.ConsoleUrl)
 	fmt.Print("\r\n\r\n")
 	for i := 0; i < count; i++ {
 		// 返回合同Id
