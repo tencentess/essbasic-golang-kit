@@ -3,9 +3,10 @@ package api
 import (
 	"essbasic-golang-kit_/utils"
 	"fmt"
+	"testing"
+
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
 	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
-	"testing"
 )
 
 // 通过上传后的pdf资源编号来创建待签署的合同流程测试

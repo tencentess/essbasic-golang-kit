@@ -3,8 +3,9 @@ package api
 import (
 	"essbasic-golang-kit_/utils"
 	"fmt"
-	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
 	"testing"
+
+	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
 )
 
 // 用于生成pdf资源编号测试

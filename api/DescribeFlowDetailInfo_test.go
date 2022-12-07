@@ -3,8 +3,9 @@ package api
 import (
 	"essbasic-golang-kit_/utils"
 	"fmt"
-	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
 	"testing"
+
+	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
 )
 
 // 用于查询合同(签署流程)的详细信息测试

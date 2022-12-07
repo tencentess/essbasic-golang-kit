@@ -3,9 +3,10 @@ package api
 import (
 	"essbasic-golang-kit_/utils"
 	"fmt"
+	"testing"
+
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
 	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
-	"testing"
 )
 
 // 用于使用多个模板批量创建签署流程测试

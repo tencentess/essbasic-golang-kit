@@ -28,8 +28,8 @@ func ChannelCreateMultiFlowSignQRCode(agent *essbasic.Agent, templateId, flowNam
 	request.TemplateId = &templateId
 	// 签署流程名称，最大长度200个字符。
 	request.FlowName = &flowName
-	// 返回的resp是一个ChannelCreateMultiFlowSignQRCodeResponse的实例，与请求对象对应
 
+	// 返回的resp是一个ChannelCreateMultiFlowSignQRCodeResponse的实例，与请求对象对应
 	response, err := client.ChannelCreateMultiFlowSignQRCode(request)
 	if _, ok := err.(*errors.TencentCloudSDKError); ok {
 		fmt.Printf("An API error has returned: %s", err)

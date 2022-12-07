@@ -20,6 +20,8 @@ func CreateConsoleLoginUrl(agent *essbasic.Agent, proxyOrganizationName string) 
 	request := essbasic.NewCreateConsoleLoginUrlRequest()
 
 	// 渠道应用相关信息
+	proxyAppId := ""
+	agent.ProxyAppId = &proxyAppId
 	request.Agent = agent
 	//渠道侧合作企业名称，最大长度64个字符
 	request.ProxyOrganizationName = &proxyOrganizationName

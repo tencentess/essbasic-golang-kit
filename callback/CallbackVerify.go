@@ -9,17 +9,17 @@ import (
 
 func main() {
 	// 回调消息体
-	payload := "**********";
+	payload := "**********"
 	// secretToken 创建应用号时配置的
-	secretToken := "**********";
+	secretToken := "**********"
 
 	// 1. 取出header [Content-Signature]
-	signFromHeader := "***********";
+	signFromHeader := "***********"
 	// 2. 验证签名
-	hash := Hmacsha256hex(payload, secretToken);
+	hash := "sha256=" + Hmacsha256hex(payload, secretToken)
 
 	//3. 如果验证通过，继续处理。如果不通过，忽略该请求
-	fmt.Println(hash == signFromHeader);
+	fmt.Println(hash == signFromHeader)
 
 }
 

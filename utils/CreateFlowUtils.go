@@ -3,10 +3,11 @@ package utils
 import (
 	"encoding/base64"
 	"essbasic-golang-kit_/config"
+	"io/ioutil"
+
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/profile"
 	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
-	"io/ioutil"
 )
 
 // InitClient 初始化Client

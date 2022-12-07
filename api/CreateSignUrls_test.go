@@ -3,8 +3,9 @@ package api
 import (
 	"essbasic-golang-kit_/utils"
 	"fmt"
-	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
 	"testing"
+
+	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
 )
 
 // 创建跳转小程序查看或签署的链接测试
