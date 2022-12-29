@@ -8,6 +8,7 @@ func BuildApprovers() []*v20210526.FlowApproverInfo {
 	// 个人签署方参数
 	personName := "***"
 	personMobile := "*********"
+
 	// 企业签署方参数
 	//organizationName := "*********"
 	//organizationOpenId := "***************"
@@ -16,8 +17,10 @@ func BuildApprovers() []*v20210526.FlowApproverInfo {
 
 	// 传入个人签署方
 	flowApproverInfos = append(flowApproverInfos, BuildPersonApprover(&personName, &personMobile))
+
 	// 传入企业签署方
 	// flowApproverInfos = append(flowApproverInfos, BuildOrganizationApprover(&organizationName, &organizationOpenId, &openId))
+
 	// 传入企业静默签署
 	// flowApproverInfos = append(flowApproverInfos, BuildServerSignApprover())
 
@@ -29,82 +32,107 @@ func BuildPersonApprover(name, mobile *string) *v20210526.FlowApproverInfo {
 	// 签署参与者信息
 	// 个人签署方
 	flowApproverInfo := &v20210526.FlowApproverInfo{}
-	// 签署人类型，PERSON-个人；
-	// ORGANIZATION-企业；
-	// ENTERPRISESERVER-企业静默签;
-	// 注：ENTERPRISESERVER 类型仅用于使用文件创建流程（ChannelCreateFlowByFiles）接口；并且仅能指定发起方企业签署方为静默签署；
+
+	// 签署人类型
+	// PERSON-个人/自然人；
+	// ORGANIZATION-企业（企业签署方或模版发起时的企业静默签）；
+	// ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
 	approverType := "PERSON"
 	flowApproverInfo.ApproverType = &approverType
-	// 本环节需要操作人的名字
+
+	// 签署人姓名，最大长度50个字符
 	flowApproverInfo.Name = name
-	// 本环节需要操作人的手机号
+	// 签署人手机号，脱敏显示。大陆手机号为11位，暂不支持海外手机号
 	flowApproverInfo.Mobile = mobile
 
+	// 控件，包括填充控件、签署控件，具体查看
+	// https://cloud.tencent.com/document/api/1420/61525#Component
 	var components []*v20210526.Component
 
+	// 这里简单定义一个个人手写签名的签署控件
 	component := BuildComponent(146.15625, 472.78125, 112,
 		40, 0, 1, "SIGN_SIGNATURE", "")
-
 	components = append(components, component)
-
 	flowApproverInfo.SignComponents = components
+
 	return flowApproverInfo
 }
 
 // BuildOrganizationApprover 打包企业签署方参与者信息
 func BuildOrganizationApprover(organizationName, organizationOpenId, openId *string) *v20210526.FlowApproverInfo {
 	// 签署参与者信息
-	// 个人签署方
+	// 企业签署方
 	flowApproverInfo := &v20210526.FlowApproverInfo{}
-	// 签署人类型，PERSON-个人；
-	// ORGANIZATION-企业；
-	// ENTERPRISESERVER-企业静默签;
-	// 注：ENTERPRISESERVER 类型仅用于使用文件创建流程（ChannelCreateFlowByFiles）接口；并且仅能指定发起方企业签署方为静默签署；
+
+	// 签署人类型
+	// PERSON-个人/自然人；
+	// ORGANIZATION-企业（企业签署方或模版发起时的企业静默签）；
+	// ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
 	approverType := "ORGANIZATION"
 	flowApproverInfo.ApproverType = &approverType
-	// 本环节需要企业操作人的企业名称
+
+	// 企业签署方工商营业执照上的企业名称，签署方为非发起方企业场景下必传，最大长度64个字符；
 	flowApproverInfo.OrganizationName = organizationName
-	// 本环节需要企业的OpenId
+
+	// 如果签署方是子客企业，此处需要传子客企业的OrganizationOpenId
+	// 企业签署方在同一渠道下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符；
 	flowApproverInfo.OrganizationOpenId = organizationOpenId
-	// 本环节需要操作人的OpenId
+	// 如果签署方是子客企业，此处需要传子客企业经办人的OpenId
+	// 当签署方为同一渠道下的员工时，该字段若不指定，则发起【待领取】的流程
 	flowApproverInfo.OpenId = openId
+
+	// 控件，包括填充控件、签署控件，具体查看
+	// https://cloud.tencent.com/document/api/1420/61525#Component
 	var components []*v20210526.Component
 
+	// 这里简单定义一个个人手写签名的签署控件
 	component := BuildComponent(146.15625, 472.78125, 112,
 		40, 0, 1, "SIGN_SIGNATURE", "")
-
 	components = append(components, component)
-
 	flowApproverInfo.SignComponents = components
+
 	return flowApproverInfo
 }
 
 // BuildServerSignApprover 打包企业静默签署方参与者信息
 func BuildServerSignApprover() *v20210526.FlowApproverInfo {
 	// 签署参与者信息
-	// 个人签署方
+	// 企业静默签
 	flowApproverInfo := &v20210526.FlowApproverInfo{}
-	// 签署人类型，PERSON-个人；
-	// ORGANIZATION-企业；
-	// ENTERPRISESERVER-企业静默签;
-	// 注：ENTERPRISESERVER 类型仅用于使用文件创建流程（ChannelCreateFlowByFiles）接口；并且仅能指定发起方企业签署方为静默签署；
+
+	// 签署人类型
+	// PERSON-个人/自然人；
+	// ORGANIZATION-企业（企业签署方或模版发起时的企业静默签）；
+	// ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
 	approverType := "ENTERPRISESERVER"
 	flowApproverInfo.ApproverType = &approverType
+
+	// 控件，包括填充控件、签署控件，具体查看
+	// https://cloud.tencent.com/document/api/1420/61525#Component
 	var components []*v20210526.Component
 
+	// 这里简单定义一个个人手写签名的签署控件
 	component := BuildComponent(146.15625, 472.78125, 112,
 		40, 0, 1, "SIGN_SIGNATURE", "")
-
 	components = append(components, component)
-
 	flowApproverInfo.SignComponents = components
+
 	return flowApproverInfo
 }
 
 // BuildComponent 构建（签署）控件信息
+// 详细参考 https://cloud.tencent.com/document/api/1420/61525#Component
+
+// 在通过文件发起合同时，对应的component有三种定位方式
+// 绝对定位方式
+// 表单域(FIELD)定位方式
+// 关键字(KEYWORD)定位方式
+// 可以参考官网说明
+// https://cloud.tencent.com/document/product/1323/78346#component-.E4.B8.89.E7.A7.8D.E5.AE.9A.E4.BD.8D.E6.96.B9.E5.BC.8F.E8.AF.B4.E6.98.8E
 func BuildComponent(componentPosX, componentPosY, componentWidth, componentHeight float64,
 	fileIndex, componentPage int64, componentType, componentValue string) *v20210526.Component {
 	var component = v20210526.Component{
+		// 位置信息 包括：
 		// 参数控件X位置，单位px
 		ComponentPosX: &componentPosX,
 		// 参数控件Y位置，单位px
@@ -117,20 +145,12 @@ func BuildComponent(componentPosX, componentPosY, componentWidth, componentHeigh
 		FileIndex: &fileIndex,
 		// 参数控件所在页码，从1开始
 		ComponentPage: &componentPage,
-		// 如果是Component控件类型，则可选的字段为：
-		//TEXT - 普通文本控件；
-		//DATE - 普通日期控件；跟TEXT相比会有校验逻辑
-		//DYNAMIC_TABLE- 动态表格控件
-		//如果是SignComponent控件类型，则可选的字段为
-		//SIGN_SEAL - 签署印章控件；
-		//SIGN_DATE - 签署日期控件；
-		//SIGN_SIGNATURE - 用户签名控件；
-		//SIGN_PERSONAL_SEAL - 个人签署印章控件；
-		//表单域的控件不能作为印章和签名控件
+
+		// 控件类型与对应值，这里以官网说明为准
+		// https://cloud.tencent.com/document/api/1420/61525#Component
 		ComponentType: &componentType,
-		// 印章 ID，传参 DEFAULT_COMPANY_SEAL 表示使用默认印章。
-		// 控件填入内容，印章控件里面，如果是手写签名内容为PNG图片格式的base64编码。
 		ComponentValue: &componentValue,
 	}
+	
 	return &component
 }

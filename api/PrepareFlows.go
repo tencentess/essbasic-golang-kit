@@ -12,6 +12,7 @@ import (
 // 该接口 (PrepareFlows) 用于创建待发起文件
 // 用户通过该接口进入签署流程发起的确认页面，进行发起信息二次确认， 如果确认则进行正常发起。
 // 目前该接口只支持B2C，不建议使用，将会废弃。
+// 详细参考 https://cloud.tencent.com/document/api/1420/61519
 func PrepareFlows(agent *essbasic.Agent, flowInfos []*essbasic.FlowInfo,
 	jumpUrl *string) *essbasic.PrepareFlowsResponse {
 	// 实例化一个认证对象，入参需要传入腾讯云账户secretId，secretKey,此处还需注意密钥对的保密
@@ -23,7 +24,8 @@ func PrepareFlows(agent *essbasic.Agent, flowInfos []*essbasic.FlowInfo,
 	// 实例化一个请求对象,每个接口都会对应一个request对象
 	request := essbasic.NewPrepareFlowsRequest()
 
-	// 渠道应用相关信息
+	// 渠道应用相关信息。 
+	// 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
 	request.Agent = agent
 	// 多个合同（签署流程）信息，最大支持20个签署流程。
 	request.FlowInfos = flowInfos

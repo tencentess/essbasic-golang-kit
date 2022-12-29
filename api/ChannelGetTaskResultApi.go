@@ -10,6 +10,7 @@ import (
 
 // ChannelGetTaskResultApi
 // 渠道版查询转换任务状态
+// 详细参考 https://cloud.tencent.com/document/api/1420/78773
 func ChannelGetTaskResultApi(agent *essbasic.Agent, taskId *string) *essbasic.ChannelGetTaskResultApiResponse {
 	// 实例化一个认证对象，入参需要传入腾讯云账户secretId，secretKey,此处还需注意密钥对的保密
 	client, err := utils.InitClient()
@@ -20,7 +21,8 @@ func ChannelGetTaskResultApi(agent *essbasic.Agent, taskId *string) *essbasic.Ch
 	// 实例化一个请求对象,每个接口都会对应一个request对象
 	request := essbasic.NewChannelGetTaskResultApiRequest()
 
-	// 渠道应用相关信息
+	// 渠道应用相关信息。 
+	// 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
 	request.Agent = agent
 	// 任务Id，通过ChannelCreateConvertTaskApi接口获得
 	request.TaskId = taskId

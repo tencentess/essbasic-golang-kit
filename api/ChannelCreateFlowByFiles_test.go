@@ -22,16 +22,17 @@ func TestChannelCreateFlowByFiles(t *testing.T) {
 	// 个人签署方参数
 	var flowApproverInfos = []*essbasic.FlowApproverInfo{
 		{
-			// 签署人类型，PERSON-个人；
-			// ORGANIZATION-企业；
-			// ENTERPRISESERVER-企业静默签;
-			// 注：ENTERPRISESERVER 类型仅用于使用文件创建流程（ChannelCreateFlowByFiles）接口；并且仅能指定发起方企业签署方为静默签署；
+			// 签署人类型
+			// PERSON-个人/自然人；
+			// PERSON_AUTO_SIGN-个人自动签（定制化场景下使用）；
+			// ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；
+			// ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
 			ApproverType: common.StringPtr("PERSON"),
 			// 操作人的名字
 			Name: common.StringPtr("*****"),
 			// 操作人的手机号
 			Mobile: common.StringPtr("**********"),
-			//（签署）控件信息
+			//（使用PDF文件直接发起合同时，签署人指定的签署控件
 			SignComponents: []*essbasic.Component{
 				{
 					// 参数控件X位置，单位px
@@ -46,6 +47,7 @@ func TestChannelCreateFlowByFiles(t *testing.T) {
 					FileIndex: common.Int64Ptr(0),
 					// 参数控件所在页码，从1开始
 					ComponentPage: common.Int64Ptr(1),
+					
 					// 如果是Component控件类型，则可选的字段为：
 					//TEXT - 普通文本控件；
 					//DATE - 普通日期控件；跟TEXT相比会有校验逻辑

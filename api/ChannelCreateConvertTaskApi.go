@@ -10,6 +10,7 @@ import (
 
 // ChannelCreateConvertTaskApi
 // 渠道创建文件转换任务
+// 详细参考 https://cloud.tencent.com/document/api/1420/78774
 func ChannelCreateConvertTaskApi(agent *essbasic.Agent,
 	resourceType, resourceName, resourceId *string) *essbasic.ChannelCreateConvertTaskApiResponse {
 	// 实例化一个认证对象，入参需要传入腾讯云账户secretId，secretKey,此处还需注意密钥对的保密
@@ -21,9 +22,10 @@ func ChannelCreateConvertTaskApi(agent *essbasic.Agent,
 	// 实例化一个请求对象,每个接口都会对应一个request对象
 	request := essbasic.NewChannelCreateConvertTaskApiRequest()
 
-	// 渠道应用相关信息
+	// 渠道应用相关信息。 
+	// 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
 	request.Agent = agent
-	// 资源类型 取值范围doc,docx,html,excel之一
+	// 资源类型 取值范围doc,docx,html,xls,xlsx之一
 	request.ResourceType = resourceType
 	// 资源名称，长度限制为256字符
 	request.ResourceName = resourceName
