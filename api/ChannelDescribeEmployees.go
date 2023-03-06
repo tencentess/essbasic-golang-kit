@@ -1,15 +1,15 @@
 package api
 
 import (
-	"essbasic-golang-kit_/utils"
 	"fmt"
+
+	"essbasic-golang-kit_/utils"
 
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
 	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
 )
 
-// ChannelDescribeEmployees
-// 查询企业员工列表
+// ChannelDescribeEmployees 查询企业员工列表
 // 详细参考 https://cloud.tencent.com/document/api/1420/81119
 func ChannelDescribeEmployees(agent *essbasic.Agent, filters []*essbasic.Filter,
 	offset *int64) *essbasic.ChannelDescribeEmployeesResponse {
@@ -22,7 +22,7 @@ func ChannelDescribeEmployees(agent *essbasic.Agent, filters []*essbasic.Filter,
 	// 实例化一个请求对象,每个接口都会对应一个request对象
 	request := essbasic.NewChannelDescribeEmployeesRequest()
 
-	// 渠道应用相关信息。 
+	// 第三方平台应用相关信息
 	// 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
 	request.Agent = agent
 	// 查询过滤实名用户，Key为Status，Values为["IsVerified"]

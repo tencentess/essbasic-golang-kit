@@ -22,16 +22,18 @@ func BuildApprovers(recipients []*v20210526.Recipient) []*v20210526.FlowApprover
 	var flowApproverInfos []*v20210526.FlowApproverInfo
 
 	// 传入个人签署方
-	flowApproverInfos = append(flowApproverInfos, BuildPersonApprover(&personName, &personMobile, recipients[0].RecipientId))
+	flowApproverInfos = append(flowApproverInfos, BuildPersonApprover(&personName,
+		&personMobile, recipients[0].RecipientId))
 
 	// 传入企业签署方
-	flowApproverInfos = append(flowApproverInfos, BuildOrganizationApprover(&organizationName, &organizationOpenId, &openId, recipients[0].RecipientId))
+	flowApproverInfos = append(flowApproverInfos, BuildOrganizationApprover(&organizationName,
+		&organizationOpenId, &openId, recipients[0].RecipientId))
 
 	// 传入企业静默签署，此处需要在config.php中设置一个持有的印章值serverSignSealId
 	// flowApproverInfos = append(flowApproverInfos, BuildServerSignApprover())
 
 	// 内容控件填充结构，详细说明参考
-    // https://cloud.tencent.com/document/api/1420/61525#FormField
+	// https://cloud.tencent.com/document/api/1420/61525#FormField
 
 	return flowApproverInfos
 }
@@ -44,7 +46,7 @@ func BuildPersonApprover(name, mobile, recipient *string) *v20210526.FlowApprove
 
 	// 签署人类型
 	// PERSON-个人/自然人；
-	// ORGANIZATION-企业（企业签署方或模版发起时的企业静默签）；
+	// ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；
 	// ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
 	approverType := "PERSON"
 	flowApproverInfo.ApproverType = &approverType
@@ -61,14 +63,15 @@ func BuildPersonApprover(name, mobile, recipient *string) *v20210526.FlowApprove
 }
 
 // BuildOrganizationApprover 打包企业签署方参与者信息
-func BuildOrganizationApprover(organizationName, organizationOpenId, openId, recipient *string) *v20210526.FlowApproverInfo {
+func BuildOrganizationApprover(
+	organizationName, organizationOpenId, openId, recipient *string) *v20210526.FlowApproverInfo {
 	// 签署参与者信息
 	// 企业签署方
 	flowApproverInfo := &v20210526.FlowApproverInfo{}
 
 	// 签署人类型
 	// PERSON-个人/自然人；
-	// ORGANIZATION-企业（企业签署方或模版发起时的企业静默签）；
+	// ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；
 	// ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
 	approverType := "ORGANIZATION"
 	flowApproverInfo.ApproverType = &approverType
@@ -77,10 +80,10 @@ func BuildOrganizationApprover(organizationName, organizationOpenId, openId, rec
 	flowApproverInfo.OrganizationName = organizationName
 
 	// 如果签署方是子客企业，此处需要传子客企业的OrganizationOpenId
-	// 企业签署方在同一渠道下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符；
+	// 企业签署方在同一第三方应用集成下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符；
 	flowApproverInfo.OrganizationOpenId = organizationOpenId
 	// 如果签署方是子客企业，此处需要传子客企业经办人的OpenId
-	// 当签署方为同一渠道下的员工时，该字段若不指定，则发起【待领取】的流程
+	// 当签署方为同一平台下的员工时，该字段若不指定，则发起【待领取】的流程
 	flowApproverInfo.OpenId = openId
 
 	// 模板中对应签署方的参与方id
@@ -97,7 +100,7 @@ func BuildServerSignApprover() *v20210526.FlowApproverInfo {
 
 	// 签署人类型
 	// PERSON-个人/自然人；
-	// ORGANIZATION-企业（企业签署方或模版发起时的企业静默签）；
+	// ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；
 	// ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
 	approverType := "ENTERPRISESERVER"
 
@@ -128,14 +131,14 @@ func BuildComponent(componentPosX, componentPosY, componentWidth, componentHeigh
 
 		// 控件类型与对应值，这里以官网说明为准
 		// https://cloud.tencent.com/document/api/1420/61525#Component
-		ComponentType: &componentType,
+		ComponentType:  &componentType,
 		ComponentValue: &componentValue,
 	}
-	
+
 	return &component
 }
 
-// 从模板中获取参与人信息，用于模板发起合同
+// GetRecipients 从模板中获取参与人信息，用于模板发起合同
 func GetRecipients(templateId string) []*v20210526.Recipient {
 	agent := utils.SetAgent()
 	templatesResp := api.DescribeTemplates(agent, &templateId)

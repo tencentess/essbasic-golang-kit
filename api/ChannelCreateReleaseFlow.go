@@ -1,15 +1,15 @@
 package api
 
 import (
-	"essbasic-golang-kit_/utils"
 	"fmt"
+
+	"essbasic-golang-kit_/utils"
 
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
 	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
 )
 
-// ChannelCreateReleaseFlow
-// 渠道版发起解除协议，主要应用场景为：基于一份已经签署的合同，进行解除操作。
+// ChannelCreateReleaseFlow 第三方应用集成发起解除协议，主要应用场景为：基于一份已经签署的合同，进行解除操作。
 // 合同发起人必须在电子签已经进行实名。
 // 详细参考 https://cloud.tencent.com/document/api/1420/83461
 func ChannelCreateReleaseFlow(agent *essbasic.Agent, needRelievedFlowId *string,
@@ -24,7 +24,7 @@ func ChannelCreateReleaseFlow(agent *essbasic.Agent, needRelievedFlowId *string,
 	// 实例化一个请求对象,每个接口都会对应一个request对象
 	request := essbasic.NewChannelCreateReleaseFlowRequest()
 
-	// 渠道应用相关信息。 
+	// 第三方平台应用相关信息
 	// 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
 	request.Agent = agent
 	// 待解除的流程编号（即原流程的编号）

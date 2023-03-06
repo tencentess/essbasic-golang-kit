@@ -1,15 +1,15 @@
 package api
 
 import (
-	"essbasic-golang-kit_/utils"
 	"fmt"
+
+	"essbasic-golang-kit_/utils"
 
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
 	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
 )
 
-// ChannelCreateFlowSignReview
-// 在通过接口(CreateFlowsByTemplates 或者ChannelCreateFlowByFiles)创建签署流程时
+// ChannelCreateFlowSignReview 在通过接口(CreateFlowsByTemplates 或者ChannelCreateFlowByFiles)创建签署流程时
 // 若指定了参数 NeedSignReview 为true,则可以调用此接口提交企业内部签署审批结果。
 // 若签署流程状态正常，且本企业存在签署方未签署，同一签署流程可以多次提交签署审批结果，签署时的最后一个“审批结果”有效。
 // 详细参考 https://cloud.tencent.com/document/api/1420/78953
@@ -24,7 +24,7 @@ func ChannelCreateFlowSignReview(agent *essbasic.Agent, flowId, reviewType,
 	// 实例化一个请求对象,每个接口都会对应一个request对象
 	request := essbasic.NewChannelCreateFlowSignReviewRequest()
 
-	// 渠道应用相关信息。 
+	// 第三方平台应用相关信息
 	// 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
 	request.Agent = agent
 	// 签署流程编号

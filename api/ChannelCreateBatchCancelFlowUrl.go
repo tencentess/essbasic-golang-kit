@@ -1,15 +1,15 @@
 package api
 
 import (
-	"essbasic-golang-kit_/utils"
 	"fmt"
+
+	"essbasic-golang-kit_/utils"
 
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
 	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
 )
 
-// ChannelCreateBatchCancelFlowUrl
-// 指定需要批量撤销的签署流程Id，获取批量撤销链接
+// ChannelCreateBatchCancelFlowUrl 指定需要批量撤销的签署流程Id，获取批量撤销链接
 // 客户指定需要撤销的签署流程Id，最多100个，超过100不处理；
 // 接口调用成功返回批量撤销合同的链接，通过链接跳转到电子签小程序完成批量撤销;
 // 可以撤回：未全部签署完成；不可以撤回（终态）：已全部签署完成、已拒签、已过期、已撤回。
@@ -27,7 +27,7 @@ func ChannelCreateBatchCancelFlowUrl(agent *essbasic.Agent,
 	// 实例化一个请求对象,每个接口都会对应一个request对象
 	request := essbasic.NewChannelCreateBatchCancelFlowUrlRequest()
 
-	// 渠道应用相关信息。 
+	// 第三方平台应用相关信息
 	// 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
 	request.Agent = agent
 	// 签署流程Id数组

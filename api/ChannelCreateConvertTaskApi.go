@@ -1,15 +1,15 @@
 package api
 
 import (
-	"essbasic-golang-kit_/utils"
 	"fmt"
+
+	"essbasic-golang-kit_/utils"
 
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
 	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
 )
 
-// ChannelCreateConvertTaskApi
-// 渠道创建文件转换任务
+// ChannelCreateConvertTaskApi 平台企业创建文件转换任务
 // 详细参考 https://cloud.tencent.com/document/api/1420/78774
 func ChannelCreateConvertTaskApi(agent *essbasic.Agent,
 	resourceType, resourceName, resourceId *string) *essbasic.ChannelCreateConvertTaskApiResponse {
@@ -22,7 +22,7 @@ func ChannelCreateConvertTaskApi(agent *essbasic.Agent,
 	// 实例化一个请求对象,每个接口都会对应一个request对象
 	request := essbasic.NewChannelCreateConvertTaskApiRequest()
 
-	// 渠道应用相关信息。 
+	// 第三方平台应用相关信息
 	// 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
 	request.Agent = agent
 	// 资源类型 取值范围doc,docx,html,xls,xlsx之一

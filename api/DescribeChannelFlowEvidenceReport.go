@@ -1,15 +1,15 @@
 package api
 
 import (
-	"essbasic-golang-kit_/utils"
 	"fmt"
+
+	"essbasic-golang-kit_/utils"
 
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
 	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
 )
 
-// DescribeChannelFlowEvidenceReport
-// 查询出证报告，返回报告 URL。
+// DescribeChannelFlowEvidenceReport 查询出证报告，返回报告 URL。
 // 详细参考 https://cloud.tencent.com/document/api/1420/83442
 func DescribeChannelFlowEvidenceReport(agent *essbasic.Agent,
 	reportId *string) *essbasic.DescribeChannelFlowEvidenceReportResponse {
@@ -22,7 +22,7 @@ func DescribeChannelFlowEvidenceReport(agent *essbasic.Agent,
 	// 实例化一个请求对象,每个接口都会对应一个request对象
 	request := essbasic.NewDescribeChannelFlowEvidenceReportRequest()
 
-	// 渠道应用相关信息。 
+	// 第三方平台应用相关信息
 	// 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
 	request.Agent = agent
 	// 出证报告编号

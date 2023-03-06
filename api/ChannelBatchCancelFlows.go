@@ -1,15 +1,15 @@
 package api
 
 import (
-	"essbasic-golang-kit_/utils"
 	"fmt"
+
+	"essbasic-golang-kit_/utils"
 
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
 	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
 )
 
-// ChannelBatchCancelFlows
-// 指定需要批量撤销的签署流程Id，批量撤销合同
+// ChannelBatchCancelFlows 指定需要批量撤销的签署流程Id，批量撤销合同
 // 客户指定需要撤销的签署流程Id，最多100个，超过100不处理；接口失败后返回错误信息
 // 注意:
 // 能撤回合同的只能是合同的发起人或者发起企业的超管、法人
@@ -25,7 +25,7 @@ func ChannelBatchCancelFlows(agent *essbasic.Agent, flowIds []*string,
 	// 实例化一个请求对象,每个接口都会对应一个request对象
 	request := essbasic.NewChannelBatchCancelFlowsRequest()
 
-	// 渠道应用相关信息。 
+	// 第三方平台应用相关信息
 	// 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
 	request.Agent = agent
 	// 签署流程Id数组，最多100个，超过100不处理

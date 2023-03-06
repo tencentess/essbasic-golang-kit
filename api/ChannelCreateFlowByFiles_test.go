@@ -1,9 +1,10 @@
 package api
 
 import (
-	"essbasic-golang-kit_/utils"
 	"fmt"
 	"testing"
+
+	"essbasic-golang-kit_/utils"
 
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
 	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
@@ -15,7 +16,7 @@ func TestChannelCreateFlowByFiles(t *testing.T) {
 	fileId := "**********************"
 	// 签署流程名称,最大长度200个字符
 	flowName := "我的第一份文件合同"
-	// 渠道应用相关信息
+	// 第三方平台应用相关信息
 	agent := utils.SetAgent()
 
 	// 签署方参与信息
@@ -47,7 +48,7 @@ func TestChannelCreateFlowByFiles(t *testing.T) {
 					FileIndex: common.Int64Ptr(0),
 					// 参数控件所在页码，从1开始
 					ComponentPage: common.Int64Ptr(1),
-					
+
 					// 如果是Component控件类型，则可选的字段为：
 					//TEXT - 普通文本控件；
 					//DATE - 普通日期控件；跟TEXT相比会有校验逻辑

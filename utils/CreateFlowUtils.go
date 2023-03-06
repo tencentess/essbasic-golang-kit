@@ -47,11 +47,12 @@ func SetAgent() *essbasic.Agent {
 }
 
 // FillFlowInfo 设置FlowInfo
-func FillFlowInfo(TemplateId, FlowName string, flowApproverInfos []*essbasic.FlowApproverInfo) *essbasic.FlowInfo {
+func FillFlowInfo(templateId, flowName string,
+	flowApproverInfos []*essbasic.FlowApproverInfo) *essbasic.FlowInfo {
 	FlowType := "合同"
 	var flowInfo = &essbasic.FlowInfo{
-		TemplateId:    &TemplateId,
-		FlowName:      &FlowName,
+		TemplateId:    &templateId,
+		FlowName:      &flowName,
 		FlowApprovers: flowApproverInfos,
 		FlowType:      &FlowType,
 	}
@@ -66,11 +67,4 @@ func ConvertImageFileToBase64(filePath string) string {
 	}
 	bs64 := base64.StdEncoding.EncodeToString(fileBytes)
 	return bs64
-}
-
-func BuildFormField(componentName, componentValue string) *essbasic.FormField {
-	return &essbasic.FormField{
-		ComponentName:  common.StringPtr(componentName),
-		ComponentValue: common.StringPtr(componentValue),
-	}
 }

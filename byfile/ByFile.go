@@ -19,7 +19,8 @@ func BuildApprovers() []*v20210526.FlowApproverInfo {
 	flowApproverInfos = append(flowApproverInfos, BuildPersonApprover(&personName, &personMobile))
 
 	// 传入企业签署方
-	// flowApproverInfos = append(flowApproverInfos, BuildOrganizationApprover(&organizationName, &organizationOpenId, &openId))
+	// flowApproverInfos = append(flowApproverInfos,
+	//BuildOrganizationApprover(&organizationName, &organizationOpenId, &openId))
 
 	// 传入企业静默签署
 	// flowApproverInfos = append(flowApproverInfos, BuildServerSignApprover())
@@ -35,7 +36,7 @@ func BuildPersonApprover(name, mobile *string) *v20210526.FlowApproverInfo {
 
 	// 签署人类型
 	// PERSON-个人/自然人；
-	// ORGANIZATION-企业（企业签署方或模版发起时的企业静默签）；
+	// ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；
 	// ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
 	approverType := "PERSON"
 	flowApproverInfo.ApproverType = &approverType
@@ -66,7 +67,7 @@ func BuildOrganizationApprover(organizationName, organizationOpenId, openId *str
 
 	// 签署人类型
 	// PERSON-个人/自然人；
-	// ORGANIZATION-企业（企业签署方或模版发起时的企业静默签）；
+	// ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；
 	// ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
 	approverType := "ORGANIZATION"
 	flowApproverInfo.ApproverType = &approverType
@@ -75,10 +76,10 @@ func BuildOrganizationApprover(organizationName, organizationOpenId, openId *str
 	flowApproverInfo.OrganizationName = organizationName
 
 	// 如果签署方是子客企业，此处需要传子客企业的OrganizationOpenId
-	// 企业签署方在同一渠道下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符；
+	// 企业签署方在同一第三方应用集成下的其他合作企业OpenId，签署方为非发起方企业场景下必传，最大长度64个字符；
 	flowApproverInfo.OrganizationOpenId = organizationOpenId
 	// 如果签署方是子客企业，此处需要传子客企业经办人的OpenId
-	// 当签署方为同一渠道下的员工时，该字段若不指定，则发起【待领取】的流程
+	// 当签署方为同一平台下的员工时，该字段若不指定，则发起【待领取】的流程
 	flowApproverInfo.OpenId = openId
 
 	// 控件，包括填充控件、签署控件，具体查看
@@ -102,7 +103,7 @@ func BuildServerSignApprover() *v20210526.FlowApproverInfo {
 
 	// 签署人类型
 	// PERSON-个人/自然人；
-	// ORGANIZATION-企业（企业签署方或模版发起时的企业静默签）；
+	// ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；
 	// ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
 	approverType := "ENTERPRISESERVER"
 	flowApproverInfo.ApproverType = &approverType
@@ -123,12 +124,12 @@ func BuildServerSignApprover() *v20210526.FlowApproverInfo {
 // BuildComponent 构建（签署）控件信息
 // 详细参考 https://cloud.tencent.com/document/api/1420/61525#Component
 
-// 在通过文件发起合同时，对应的component有三种定位方式
+// BuildComponent 在通过文件发起合同时，对应的component有三种定位方式
 // 绝对定位方式
 // 表单域(FIELD)定位方式
 // 关键字(KEYWORD)定位方式
-// 可以参考官网说明
-// https://cloud.tencent.com/document/product/1323/78346#component-.E4.B8.89.E7.A7.8D.E5.AE.9A.E4.BD.8D.E6.96.B9.E5.BC.8F.E8.AF.B4.E6.98.8E
+// 可以参考官网说明 Component 三种定位方式说明
+// https://cloud.tencent.com/document/product/1323/78346
 func BuildComponent(componentPosX, componentPosY, componentWidth, componentHeight float64,
 	fileIndex, componentPage int64, componentType, componentValue string) *v20210526.Component {
 	var component = v20210526.Component{
@@ -148,9 +149,9 @@ func BuildComponent(componentPosX, componentPosY, componentWidth, componentHeigh
 
 		// 控件类型与对应值，这里以官网说明为准
 		// https://cloud.tencent.com/document/api/1420/61525#Component
-		ComponentType: &componentType,
+		ComponentType:  &componentType,
 		ComponentValue: &componentValue,
 	}
-	
+
 	return &component
 }

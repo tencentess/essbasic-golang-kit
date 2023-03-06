@@ -57,26 +57,26 @@ go get -v -u github.com/tencentcloud/tencentcloud-sdk-go
 
 ## 目录文件说明
 ### api
-api目录是对电子签渠道版所有API的简单封装，以及调用的Example。
+api目录是对电子签第三方应用集成所有API的简单封装，以及调用的Example。
 如果需要API更加高级的功能，需要结合业务修改api的封装。
 
 ### byfile
-byfile目录是电子签渠道版的核心场景之一 - 通过文件发起的快速上手样例。
+byfile目录是电子签第三方应用集成的核心场景之一 - 通过文件发起的快速上手样例。
 业务方可以结合自己的业务调整，用于正式对接。
 
 ### bytemplate
-byfile目录是电子签渠道版的核心场景之一 - 通过模版发起的快速上手样例。
+byfile目录是电子签第三方应用集成的核心场景之一 - 通过模板发起的快速上手样例。
 业务方可以结合自己的业务调整，用于正式对接。
 
 ### testdata
 testdata是一个空白的pdf用于快速发起合同，测试。
 
 ### utils
-tools目录提供了调用电子签渠道版API时涉及到的各种算法样例。
+tools目录提供了调用电子签第三方应用集成API时涉及到的各种算法样例。
 如果不使用sdk调用电子签服务，可参考其中的签名计算方式。
 
 ### config
-里面定义调用电子签渠道版API需要的一些核心参数。
+里面定义调用电子签第三方应用集成API需要的一些核心参数。
 
-## 电子签企业版官网入口
-[腾讯电子签企业版](https://cloud.tencent.com/document/product/1323)
+## 电子签第三方应用集成官网入口
+[腾讯电子签第三方应用集成](https://cloud.tencent.com/document/api/1420/61534)

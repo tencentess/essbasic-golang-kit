@@ -1,15 +1,15 @@
 package api
 
 import (
-	"essbasic-golang-kit_/utils"
 	"fmt"
+
+	"essbasic-golang-kit_/utils"
 
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
 	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
 )
 
-// GetDownloadFlowUrl
-// 用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
+// GetDownloadFlowUrl 用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
 // 当前接口限制最多合同（流程）50个.
 // 详细参考 https://cloud.tencent.com/document/api/1420/66368
 func GetDownloadFlowUrl(agent *essbasic.Agent,
@@ -23,7 +23,7 @@ func GetDownloadFlowUrl(agent *essbasic.Agent,
 	// 实例化一个请求对象,每个接口都会对应一个request对象
 	request := essbasic.NewGetDownloadFlowUrlRequest()
 
-	// 渠道应用相关信息。 
+	// 第三方平台应用相关信息
 	// 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填。
 	request.Agent = agent
 	// 文件夹数组，签署流程总数不能超过50个，一个文件夹下，不能超过20个签署流程

@@ -1,21 +1,22 @@
 package api
 
 import (
-	"essbasic-golang-kit_/utils"
 	"fmt"
+
+	"essbasic-golang-kit_/utils"
 
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
 	essbasic "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic/v20210526"
 )
 
-// CreateConsoleLoginUrl
-// 用于创建渠道子客企业控制台Web/移动登录链接。登录链接是子客控制台的唯一入口。
+// CreateConsoleLoginUrl 用于创建子客企业控制台Web/移动登录链接。登录链接是子客控制台的唯一入口。
 // 若子客企业未激活，会进入企业激活流程，首次参与激活流程的经办人会成为超管。
 // （若企业激活过程中填写信息有误，需要重置激活流程，可以换一个经办人OpenId获取新的链接进入。）
 // 若子客企业已激活，使用了新的经办人OpenId进入，则会进入经办人的实名流程。
 // 若子客企业、经办人均已完成认证，则会直接进入子客Web控制台。
 // 详细参考 https://cloud.tencent.com/document/api/1420/61524
-func CreateConsoleLoginUrl(agent *essbasic.Agent, proxyOrganizationName string) *essbasic.CreateConsoleLoginUrlResponse {
+func CreateConsoleLoginUrl(agent *essbasic.Agent,
+	proxyOrganizationName string) *essbasic.CreateConsoleLoginUrlResponse {
 	// 实例化一个认证对象，入参需要传入腾讯云账户secretId，secretKey,此处还需注意密钥对的保密
 	client, err := utils.InitClient()
 	if err != nil {
@@ -30,7 +31,7 @@ func CreateConsoleLoginUrl(agent *essbasic.Agent, proxyOrganizationName string) 
 	proxyAppId := ""
 	agent.ProxyAppId = &proxyAppId
 	request.Agent = agent
-	//渠道侧合作企业名称，最大长度64个字符
+	// 子客企业名称，最大长度64个字符
 	request.ProxyOrganizationName = &proxyOrganizationName
 
 	// 其他参数根据业务需要参考接口文档
