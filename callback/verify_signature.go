@@ -7,6 +7,7 @@ import (
 	"fmt"
 )
 
+// 验证回调消息中的签名
 func main() {
 	// 回调消息体
 	payload := "**********"
