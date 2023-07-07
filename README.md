@@ -1,59 +1,16 @@
-# 腾讯电子签企业版API接入工具包
+# 腾讯电子签第三方应用集成API接入工具包
 
-## 项目说明
-项目通过go get引入了腾讯云sdk，补充了调用电子签企业版API所需要的内容，并提供了调用的样例。使用前请先在项目中导入腾讯云sdk。
+## 安装腾讯云sdk
+安装 .NET SDK 前，先获取安全凭证。在第一次使用云API之前，用户首先需要在腾讯云控制台上申请安全凭证，安全凭证包括 SecretID 和 SecretKey ， SecretID 是用于标识 API 调用者的身份， SecretKey 是用于加密签名字符串和服务器端验证签名字符串的密钥。 SecretKey 必须严格保管，避免泄露。
+参考：https://cloud.tencent.com/document/sdk/.NET
+### 通过nuget 安装(推荐)
+1. 通过命令行安装: dotnet add package TencentCloudSDK ，其他信息请到 nuget 获取。如果想单独安装某个产品，例如云服务器 CVM，则添加依赖 TencentCloudSDK.Cvm 即可。
 
-## 通过go get安装（推荐）
+2. 通过 Visual Studio 的添加包
 
-推荐使用腾讯云镜像加速下载：
+### 通过源码安装
+前往 Github 仓库 或者 Gitee 仓库 下载最新代码，解压后使用 Visual Studio 2017 打开编译。
 
-1. Linux 或 MacOS:
-
-    ```bash
-    export GOPROXY=https://mirrors.tencent.com/go/
-    ```
-
-2. Windows:
-
-    ```cmd
-    set GOPROXY=https://mirrors.tencent.com/go/
-    ```
-
-### 按需安装（推荐）
-
-注意：此安装方式仅支持使用 **Go Modules** 模式进行依赖管理，即环境变量 `GO111MODULE=auto`或者`GO111MODULE=on`, 并且在您的项目中执行了 `go mod init xxx`.
-
-如果您使用 GOPATH, 请参考下节： 全部安装
-
-v1.0.170后可以按照产品下载，您只需下载基础包和对应的产品包(如ess)即可，不需要下载全部的产品，从而加快您构建镜像或者编译的速度：
-
-1. 安装公共基础包：
-
-    ```bash
-    go get -v -u github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common
-    ```
-
-2. 安装对应的产品包(如ess):
-
-    ```bash
-    go get -v -u github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/essbasic
-    ```
-
-### 全部安装
-
-此模式支持 GOPATH 和 Go Modules
-
-此方式会一次性下载腾讯云所有产品的包：
-
-```bash
-go get -v -u github.com/tencentcloud/tencentcloud-sdk-go
-```
-
-注意：为了支持 go mod，SDK 版本号从 v3.x 降到了 v1.x。并于2021.05.10移除了所有`v3.0.*`和`3.0.*`的tag，如需追溯以前的tag，请参考项目根目录下的 `commit2tag` 文件。
-
-## 通过源码安装
-
-前往代码托管地址 [Github](https://github.com/tencentcloud/tencentcloud-sdk-go) 或者 [Gitee](https://gitee.com/tencentcloud/tencentcloud-sdk-go) 下载最新代码，解压后安装到 $GOPATH/src/github.com/tencentcloud 目录下。
 
 ## 目录文件说明
 ### api
@@ -68,15 +25,25 @@ byfile目录是电子签第三方应用集成的核心场景之一 - 通过文�
 byfile目录是电子签第三方应用集成的核心场景之一 - 通过模板发起的快速上手样例。
 业务方可以结合自己的业务调整，用于正式对接。
 
+### callback
+callback目录是电子签第三方应用集成对接的回调解密部分。
+业务方需要配置好回调地址和加密key，就可以接收到相关的回调了。
+
 ### testdata
 testdata是一个空白的pdf用于快速发起合同，测试。
 
-### utils
-tools目录提供了调用电子签第三方应用集成API时涉及到的各种算法样例。
-如果不使用sdk调用电子签服务，可参考其中的签名计算方式。
-
-### config
+### config.cs
 里面定义调用电子签第三方应用集成API需要的一些核心参数。
+
+
+## 运行说明
+<label style="color:red">.Net Framework 4.7版本以下，默认不支持SSL 1.2/1.3，如果出现“发出请求错误”, 请配置如下</label>
+```
+System.Net.ServicePointManager.SecurityProtocol = 
+    SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+```
 
 ## 电子签第三方应用集成官网入口
 [腾讯电子签第三方应用集成](https://cloud.tencent.com/document/api/1420/61534)
+
+
