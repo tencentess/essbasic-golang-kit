@@ -11,7 +11,7 @@ import (
 // 用于查询合同(签署流程)的详细信息测试
 func TestDescribeFlowDetailInfo(t *testing.T) {
 	agent := utils.SetAgent()
-	// 资源所对应的签署流程Id
+
 	flowIds := []*string{common.StringPtr("******************")}
 
 	response := DescribeFlowDetailInfo(agent, flowIds)

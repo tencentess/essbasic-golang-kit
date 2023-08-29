@@ -11,7 +11,7 @@ import (
 // 根据签署流程信息批量获取资源下载链接测试
 func TestDescribeResourceUrlsByFlows(t *testing.T) {
 	agent := utils.SetAgent()
-	// 资源所对应的签署流程Id
+
 	flowIds := []*string{common.StringPtr("******************")}
 
 	response := DescribeResourceUrlsByFlows(flowIds, agent)

@@ -79,4 +79,4 @@ tools目录提供了调用电子签第三方应用集成API时涉及到的各种
 里面定义调用电子签第三方应用集成API需要的一些核心参数。
 
 ## 电子签第三方应用集成官网入口
-[腾讯电子签第三方应用集成](https://cloud.tencent.com/document/api/1420/61534)
+[腾讯电子签开发者中心](https://qian.tencent.com/developers/partner/overview)

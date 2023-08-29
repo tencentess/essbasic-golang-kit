@@ -17,13 +17,13 @@ func TestCreateFlowsByTemplates(t *testing.T) {
 
 	flowInfos := []*essbasic.FlowInfo{
 		{
-			// 模板Id
+
 			TemplateId: common.StringPtr("***************"),
-			// 签署流程名称，长度不超过200个字符
+
 			FlowName: common.StringPtr("我的第一份合同"),
-			// 签署类型
+
 			FlowType: common.StringPtr("合同"),
-			// 签署人信息
+
 			FlowApprovers: []*essbasic.FlowApproverInfo{
 				{
 					ApproverType: common.StringPtr("PERSON"),
